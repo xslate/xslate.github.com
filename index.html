@@ -31,6 +31,27 @@
         <li><a href="http://search.cpan.org/dist/Text-Xslate/">documents on CPAN</a></li>
     </ul>
 
+    <h2>Template code</h2>
+    <pre><code>
+    : # in Kolon, the default syntax
+    : for ["Xslate"] -&gt; $lang {
+        Hello, &lt;: $lang :&gt; world!
+    : }
+    </pre></code>
+
+    <pre><code>
+    [%# in TTerse, a TT2 compatible syntax -%]
+    [% FOR lang IN ["Xslate"] -%]
+        Hello, [% lang %] world!
+    [% END -%]
+    </pre></code>
+
+    <pre><code>
+    {* in Clevy, a Smarty compatible syntax *}
+    {select from=["Xslate"] item=lang}
+        Hello, {$lang} world!
+    {/select}
+    </code></pre>
     <h2>What People Say</h2>
     <ul>
         <li>xslate++ # pretty fast  - tokuhirom</li>
