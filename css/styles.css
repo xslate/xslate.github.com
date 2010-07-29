@@ -23,11 +23,10 @@ em { font-style: italic; font-weight: bold }
 }
 
 .GraphContainer {
-    margin-top: 40px;
-    margin-bottom: 40px;
-    text-align: center;
+    float: right;
 }
 .header {
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
