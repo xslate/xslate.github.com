@@ -48,9 +48,9 @@
 
     <pre><code>
     {* in Clevy, a Smarty compatible syntax *}
-    {select from=["Xslate"] item=lang}
+    {foreach from=`["Xslate"]` item=lang}
         Hello, {$lang} world!
-    {/select}
+    {/foreach}
     </code></pre>
     <h2>What People Say</h2>
     <ul>
