@@ -1,0 +1,32 @@
+body {
+    width: 800px;
+    margin: auto;
+    font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6 { display: block; font-weight: bold }
+h1 {
+    font-size: 3em;
+    margin: 0;
+}
+h2 { font-size: 1.5em }
+h3 { font-size: 1.3em }
+h4 { font-size: 1.2em }
+
+#content ul {
+    margin: 10px;
+}
+#content ul li {
+    margin-left: 2em;
+    list-style: disc;
+}
+
+.GraphContainer {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+.header {
+    margin-top: 20px;
+}
+
