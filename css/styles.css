@@ -1,6 +1,4 @@
 body {
-    width: 800px;
-    margin: auto;
     font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
 }
 
@@ -14,6 +12,10 @@ h3 { font-size: 1.3em }
 h4 { font-size: 1.2em }
 em { font-style: italic; font-weight: bold }
 
+#content {
+    width: 800px;
+    margin: auto;
+}
 #content ul {
     margin: 10px;
 }
@@ -28,5 +30,7 @@ em { font-style: italic; font-weight: bold }
 .header {
     margin-top: 20px;
     margin-bottom: 20px;
+    padding: 0 0 20px 20px;
+    border-bottom: 1px solid #00f;
 }
 
