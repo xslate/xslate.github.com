@@ -43,12 +43,12 @@
         <pre><code>: # in Kolon, the default syntax
 : for ["Xslate"] -&gt; $lang {
 Hello, &lt;: $lang :&gt; world!
-: }</pre></code>
+: }</code></pre>
 
         <pre><code>[%# in TTerse, a TT2 compatible syntax -%]
 [% FOR lang IN ["Xslate"] -%]
 Hello, [% lang %] world!
-[% END -%]</pre></code>
+[% END -%]</code></pre>
 
         <pre><code>{* in Clevy, a Smarty compatible syntax *}
 {foreach from=`["Xslate"]` item=lang}
