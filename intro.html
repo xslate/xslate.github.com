@@ -21,8 +21,8 @@
         <p>Main subjects of this page are listed below:</p>
         <ul>
             <li>Iterateion</li>
-            <li>| dump - It's useful for debugging</li>
-            <li>mark_raw() and unmark_war() - Output the text without escaping</li>
+            <li>The dump filter - useful for debugging</li>
+            <li>mark_raw() - To output a text without escaping</li>
         </ul>
         </div>
 
@@ -30,7 +30,7 @@
         <h2>Example</h2>
         <ul>
             <li><code>$books</code> (hashref) contains information of perl books.</li>
-            <li><code>$raw_text</code> contains raw string. For the sake of security, you must use unmark_raw() and mark_raw() when you want to render raw html string.</li>
+            <li><code>$html</code> contains a HTML source string. You must use <code>mark_raw()</code> in applications in order to interpolate HTML sources into templates. Otherwise meta characters in HTML sources will be escaped automatically.</li>
         </ul>
         <h3>./xslate_sample.pl</h3>
         <pre><code>#!/usr/bin/env perl
@@ -38,26 +38,12 @@
 use strict;
 use warnings;
 use utf8;
-use Encode;
+binmode STDOUT, ':utf8';
 
-use File::Spec;
-use Text::Xslate qw(mark_raw unmark_raw);
-
-sub raw_out {
-    my $raw = shift;
-
-    return sub {
-        my $unmarked = unmark_raw($raw);
-        return mark_raw($unmarked);
-    };
-}
+use Text::Xslate qw(mark_raw);
 
 my $xslate = Text::Xslate-&gt;new(
     path      =&gt; ['./templates'],
-    cache_dir =&gt; File::Spec-&gt;tmpdir,
-    function =&gt; {
-        raw_out =&gt; \&amp;raw_out,
-    },
 );
 
 my $books = {
@@ -79,14 +65,14 @@ my $books = {
     },
 };
 
-my $raw_text = '&lt;span style=&quot;color:red;&quot;&gt;colored&lt;/span&gt;';
+my $html = '&lt;span style=&quot;color:red;&quot;&gt;colored&lt;/span&gt;';
 
 my $content = $xslate-&gt;render(&quot;sample.xt&quot;, {
-    books =&gt; $books,
-    raw_text =&gt; $raw_text,
+    books    =&gt; $books,
+    raw_text =&gt; mark_raw($html),
 });
 
-print encode_utf8 $content;
+print $content;
 
 __END__</code></pre>
 
@@ -95,7 +81,7 @@ __END__</code></pre>
         <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
     &lt;title&gt;Xslate sample&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -108,10 +94,10 @@ __END__</code></pre>
 
 &lt;pre&gt;
 $books = 
-    : $books | dump 
+    : $books | dump
 &lt;/pre&gt;
 
-: block form | raw_out($raw_text) -&gt; {}
+: $html # interplate HTML components
 
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
@@ -121,7 +107,7 @@ $books =
         <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
     &lt;title&gt;Xslate sample&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
