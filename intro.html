@@ -68,8 +68,8 @@ my $books = {
 my $html = '&lt;span style=&quot;color:red;&quot;&gt;colored&lt;/span&gt;';
 
 my $content = $xslate-&gt;render(&quot;sample.xt&quot;, {
-    books    =&gt; $books,
-    raw_text =&gt; mark_raw($html),
+    books  =&gt; $books,
+    html   =&gt; mark_raw($html),
 });
 
 print $content;
