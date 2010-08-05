@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Xslate - The fastest template engine for Perl5</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+</head>
+<body>
+<div class="wrapper">
+    <div class="header">
+        <h1>Quick Introduction of Xslate</h1>
+        <div class="description">
+            How to use Xslate?
+        </div>
+    </div>
+    <div id="content">
+        <div class="section">
+        <h2>Overview</h2>
+        <p>In this page, we will introduce you to the most simple usage of xslate.</p>
+        <p>The main subjects of this page are listed below:</p>
+        <ul>
+            <li>Iterate</li>
+            <li>| dump - It's useful for debugging</li>
+            <li>mark_raw() and unmark_war() - Output the text without escaping</li>
+        </ul>
+        </div>
+
+        <div class="section clearfix">
+        <h2>Example</h2>
+        <ul>
+            <li><code>$books</code> (hashref) contains information of perl books.</li>
+            <li><code>$raw_text</code> contains raw string. For the sake of security, you must use unmark_raw() and mark_raw() when you want to render raw html string.</li>
+        </ul>
+        <h3>./xslate_sample.pl</h3>
+        <pre><code>#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use utf8;
+use Encode;
+
+use File::Spec;
+use Text::Xslate qw(mark_raw unmark_raw);
+
+sub raw_out {
+    my $raw = shift;
+
+    return sub {
+        my $unmarked = unmark_raw($raw);
+        return mark_raw($unmarked);
+    };
+}
+
+my $xslate = Text::Xslate-&gt;new(
+    path      =&gt; ['./templates'],
+    cache_dir =&gt; File::Spec-&gt;tmpdir,
+    function =&gt; {
+        raw_out =&gt; \&amp;raw_out,
+    },
+);
+
+my $books = {
+    &quot;978-0596520106&quot; =&gt; {
+        name  =&gt; &quot;Learning Perl&quot;,
+        pages =&gt; &quot;352&quot;,
+    },
+    &quot;978-0596000271&quot; =&gt; {
+        name  =&gt; &quot;Programming Perl&quot;,
+        pages =&gt; &quot;1092&quot;,
+    },
+    &quot;978-4873114279&quot; =&gt; {
+        name  =&gt; &quot;初めてのPerl 第5版&quot;,
+        pages =&gt; &quot;424&quot;
+    },
+    &quot;978-4798119175&quot; =&gt; {
+        name  =&gt; &quot;モダンPerl入門&quot;,
+        pages =&gt; &quot;344&quot;,
+    },
+};
+
+my $raw_text = '&lt;span style=&quot;color:red;&quot;&gt;colored&lt;/span&gt;';
+
+my $content = $xslate-&gt;render(&quot;sample.xt&quot;, {
+    books =&gt; $books,
+    raw_text =&gt; $raw_text,
+});
+
+print encode_utf8 $content;
+
+__END__</code></pre>
+
+        <h3>./templates/sample.xt</h3>
+
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;title&gt;Xslate sample&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;ol&gt;
+    : for $books.keys() -&gt; $isbn {
+    &lt;li&gt;&lt;: $books[$isbn].name :&gt; - &lt;: $books[$isbn].pages :&gt;pages / ISBN-13 : &lt;: $isbn :&gt;&lt;/li&gt;
+    : }
+&lt;/ol&gt;
+
+&lt;pre&gt;
+$books = 
+    : $books | dump 
+&lt;/pre&gt;
+
+: block form | raw_out($raw_text) -&gt; {}
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+        <h3>Output of this script:</h3>
+
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;title&gt;Xslate sample&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;ol&gt;
+    &lt;li&gt;Programming Perl - 1092pages / ISBN-13 : 978-0596000271&lt;/li&gt;
+    &lt;li&gt;Learning Perl - 352pages / ISBN-13 : 978-0596520106&lt;/li&gt;
+    &lt;li&gt;モダンPerl入門 - 344pages / ISBN-13 : 978-4798119175&lt;/li&gt;
+    &lt;li&gt;初めてのPerl 第5版 - 424pages / ISBN-13 : 978-4873114279&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;
+$books = 
+(
+  &amp;apos;978-0596000271&amp;apos; =&amp;gt; {
+    name =&amp;gt; &amp;apos;Programming Perl&amp;apos;,
+    pages =&amp;gt; &amp;apos;1092&amp;apos;
+  },
+  &amp;apos;978-0596520106&amp;apos; =&amp;gt; {
+    name =&amp;gt; &amp;apos;Learning Perl&amp;apos;,
+    pages =&amp;gt; &amp;apos;352&amp;apos;
+  },
+  &amp;apos;978-4798119175&amp;apos; =&amp;gt; {
+    name =&amp;gt; &amp;quot;\x{30e2}\x{30c0}\x{30f3}Perl\x{5165}\x{9580}&amp;quot;,
+    pages =&amp;gt; &amp;apos;344&amp;apos;
+  },
+  &amp;apos;978-4873114279&amp;apos; =&amp;gt; {
+    name =&amp;gt; &amp;quot;\x{521d}\x{3081}\x{3066}\x{306e}Perl \x{7b2c}5\x{7248}&amp;quot;,
+    pages =&amp;gt; &amp;apos;424&amp;apos;
+  }
+)
+&lt;/pre&gt;
+
+&lt;span style=&quot;color:red;&quot;&gt;colored&lt;/span&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre> 
+        </div>
+
+        <div class="section clearfix">
+        <h2>Documentation</h2>
+        <ul>
+            <li><a href="http://search.cpan.org/dist/Text-Xslate/">Documents on CPAN</a></li>
+            <li><a href="http://search.cpan.org/perldoc?Text::Xslate::Manual::FAQ">FAQ</a></li>
+            <li><a href="http://search.cpan.org/perldoc?Text::Xslate::Manual::Cookbook">Cookbook</a></li>
+        </ul>
+        </div>
+
+    </div>
+    <div class="footer">
+        If you have requests for this web site, please send pull request on <a href="http://github.com/xslate/xslate.github.com">github</a>.
+    </div>
+</div>
+</body>
+</html>
