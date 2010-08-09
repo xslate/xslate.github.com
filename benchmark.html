@@ -15,9 +15,9 @@
     </div>
     <div id="content">
         <div class="section">
-        <h2>Description / Caveats</h2>
-        <p>The <a href="http://search.cpan.org/dist/Text-Xslate">Xslate</a> engine is designed, and performs best in, a persistent environment where the same instance of Text::Xslate can be reused, and where the intermediary data structure can be cached.</p>
-        <p>In this page we will show you benchmarks from two different scenarios. One is for a persistent environemnt like FastCGI and Starman. The other is for a non-persistent environment, perhaps when using from a command line tool or in CGI mode.</p>
+        <h2>Description</h2>
+        <p>The <a href="http://search.cpan.org/dist/Text-Xslate">Xslate</a> engine is designed, and performs best in, a <em>persistent</em> environment where the same instance of Text::Xslate can be reused, and where the intermediary data structure can be cached.</p>
+        <p>In this page we will show you benchmarks from two different scenarios. One is for a persistent environemnt like FastCGI and Starman. The other is for a non-persistent environment, perhaps when using from a command line tool or in CGI script.</p>
         <p>If you're looking for a more thorough comparison for the template engines available for Perl5, you probably should look at <a href="http://www.illusori.co.uk/projects/Template-Roundup/">Sam Graham's Perl Template Roundup</a></p>
         </div>
 
@@ -46,7 +46,7 @@
             <li>You DO NOT have access to a C compiler.</li>
             <li>Modules that require an XS backend are excluded. ClearSilver is not used, and HTML::Template is used instead of HTML::Template::Pro.</li>
         </ul>
-        <p>The benchmark script (<a href="http://github.com/gfx/p5-Text-Xslate/blob/master/benchmark/x-poor-env.pl">found here</a>), which is equivalent to x-rich-env.pl with the caveats mentioned above.</p>
+        <p>The benchmark script (<a href="http://github.com/gfx/p5-Text-Xslate/blob/master/benchmark/x-poor-env.pl">found here</a>) is equivalent to x-rich-env.pl with the caveats mentioned above.</p>
         </div>
     </div>
     <div class="footer">
