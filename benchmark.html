@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+    <title>Benchmarking Xslate</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+</head>
+<body>
+<div class="wrapper">
+    <div class="header">
+        <h1>Xslate Benchmarks</h1>
+        <div class="description">
+            Benchmark results against other template engines
+        </div>
+    </div>
+    <div id="content">
+        <div class="section">
+        <h2>Description / Caveats</h2>
+        <p>The <a href="http://search.cpan.org/dist/Text-Xslate">Xslate</a> engine is designed, and performs best in, a persistent environment where the same instance of Text::Xslate can be reused, and where the intermediary data structure can be cached.</p>
+        <p>In this page we will show you benchmarks from two different scenarios. One is for a persistent environemnt like FastCGI and Starman. The other is for a non-persistent environment, perhaps when using from a command line tool or in CGI mode.</p>
+        <p>If you're looking for a more thorough comparison for the template engines available for Perl5, you probably should look at <a href="http://www.illusori.co.uk/projects/Template-Roundup/">Sam Graham's Perl Template Roundup</a></p>
+        </div>
+
+        <div class="section clearfix">
+        <h2>"Rich" Environment</h2>
+        <div style="float: right"><img width="400" height="300" src="img/benchmark_rich_env.png" /></div>
+        <p>Here's the graph showing the benchmark results for a "rich" environment. You can see that Xslate performs at a pace unparalleled by any other template engine, coming to at least 30 times faster its nearest competitor.</p>
+        <p>This benchmark assumes the following:</p>
+        <ul>
+            <li>You have access to a C compiler, therefore you are free to use XS-based modules</li>
+            <li>You can reuse the same instance of each template engines</li>
+        </ul>
+
+        <p>The benchmark script (<a href="http://github.com/gfx/p5-Text-Xslate/blob/master/benchmark/x-rich-env.pl">found here</a>), simply uses each template engine to list a set of data. In this case we're repeating the same data 100 times per template.</p>
+        </div>
+
+        <div class="section clearfix">
+        <h2>"Poor" Environment</h2>
+        <div style="float: right"><img width="400" height="300" src="img/benchmark_poor_env.png" /></div>
+
+        <div class="section clearfix">
+        <p>Here's the graph showing the benchmark results for a "poor" environment. Unlike the "rich" environment, here Xslate only performs slightly faster than TT2, and Text::MicroTemplate comes out as a clear winner.</p>
+        <p>This benchmark assumes, or is limited by, the following criteria:</p>
+        <ul>
+            <li>Instances for each engine are created for every run, just like a CGI script would do.</li>
+            <li>You DO NOT have access to a C compiler.</li>
+            <li>Modules that require an XS backend are exluded. ClearSilver is not used, and HTML::Template is used instead of HTML::Template::Pro.</li>
+        </ul>
+        <p>The benchmark script (<a href="http://github.com/gfx/p5-Text-Xslate/blob/master/benchmark/x-poor-env.pl">found here</a>), which is equivalent to x-rich-env.pl with the caveats mentioned above.</p>
+        </div>
+    </div>
+    <div class="footer">
+        If you have requests for this web site, please send pull request on <a href="http://github.com/xslate/xslate.github.com">github</a>.
+    </div>
+</div>
+</body>
+</html>

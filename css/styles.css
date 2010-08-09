@@ -55,6 +55,10 @@ pre { line-height: 1.2em; }
     margin-top: 20px;
 }
 
+#content div.section p {
+    margin-top: 10px;
+}
+
 .GraphContainer {
     float: right;
 }
