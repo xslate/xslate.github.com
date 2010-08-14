@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Quick introduction to Xslate</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="css/perl-highlight.css" />
+</head>
+<body>
+<div class="wrapper">
+    <div class="header">
+        <h1>Quick Introduction to Xslate</h1>
+        <div class="description">
+            How to use Xslate
+        </div>
+    </div>
+    <div id="content">
+        <div class="section">
+        <h2>Overview</h2>
+        <p>We will introduce you to the most simple usage of <a href="http://xslate.org" />Xslate</a>.</p>
+        <p>Main subjects of this page are listed below:</p>
+        <ul>
+            <li>Iteration</li>
+            <li>The dump filter - useful for debugging</li>
+            <li>mark_raw() - To output a text without escaping</li>
+        </ul>
+        </div>
+
+        <div class="section clearfix">
+        <h2>Example</h2>
+        <ul>
+            <li><code>$books</code> (hashref) contains information of Perl books.</li>
+            <li><code>$html</code> contains a HTML source string. You must use <code>mark_raw()</code> in applications in order to interpolate HTML sources into templates. Otherwise meta characters in template variables will be escaped automatically.</li>
+        </ul>
+        <h3>Script: perlbook.pl</h3>
+        <pre><code><: $script :></code></pre>
+        <h3>Template: templates/perlbook.tx</h3>
+        <pre><code><: $template :></code></pre>
+        <h3>Output:</h3>
+        <pre><code><: $output :></code></pre>
+
+        <div class="section clearfix">
+        <h2>SEE ALSO</h2>
+        <ul>
+            <li><a href="http://search.cpan.org/dist/Text-Xslate/">Documents on CPAN</a></li>
+            <li><a href="http://search.cpan.org/perldoc?Text::Xslate::Manual::FAQ">FAQ</a></li>
+            <li><a href="http://search.cpan.org/perldoc?Text::Xslate::Manual::Cookbook">Cookbook</a></li>
+        </ul>
+        </div>
+
+    </div>
+    <div class="footer">
+        If you have requests for this web site, please send pull request on <a href="http://github.com/xslate/xslate.github.com">github</a>.
+    </div>
+</div>
+</body>
+</html>

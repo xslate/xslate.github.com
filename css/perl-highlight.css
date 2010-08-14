@@ -1,0 +1,32 @@
+
+.comment {
+    color: #666666;
+}
+
+.keyword {
+    color: #CCCC99;
+}
+
+.pragma {
+    color: #999966;
+}
+
+.word{
+    color: #99CC99;
+}
+
+.symbol {
+    color: #99FFFF;
+}
+
+.heredoc_content, .double, .single {
+    color: #CC6666;
+}
+
+.words {
+    color: #CC9999;
+}
+
+.number {
+    color: #9999FF;
+}

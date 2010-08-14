@@ -5,19 +5,20 @@
     <title>Quick introduction to Xslate</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="css/perl-highlight.css" />
 </head>
 <body>
 <div class="wrapper">
     <div class="header">
         <h1>Quick Introduction to Xslate</h1>
         <div class="description">
-            How to use Xslate?
+            How to use Xslate
         </div>
     </div>
     <div id="content">
         <div class="section">
         <h2>Overview</h2>
-        <p>We will introduce you to the most simple usage of Xslate.</p>
+        <p>We will introduce you to the most simple usage of <a href="http://xslate.org" />Xslate</a>.</p>
         <p>Main subjects of this page are listed below:</p>
         <ul>
             <li>Iteration</li>
@@ -32,63 +33,71 @@
             <li><code>$books</code> (hashref) contains information of Perl books.</li>
             <li><code>$html</code> contains a HTML source string. You must use <code>mark_raw()</code> in applications in order to interpolate HTML sources into templates. Otherwise meta characters in template variables will be escaped automatically.</li>
         </ul>
-        <h3>./xslate_sample.pl</h3>
-        <pre><code>#!/usr/bin/env perl
+        <h3>Script: perlbook.pl</h3>
+        <pre><code><span class="comment">#!/usr/bin/env perl
+</span><span class="keyword">use</span> <span class="pragma">strict</span><span class="structure">;</span>
+<span class="keyword">use</span> <span class="pragma">warnings</span><span class="structure">;</span>
+<span class="keyword">use</span> <span class="word">Encode</span> <span class="words">qw(encode_utf8)</span><span class="structure">;</span>
 
-use strict;
-use warnings;
-use utf8;
-binmode STDOUT, ':utf8';
+<span class="keyword">use</span> <span class="word">FindBin</span> <span class="words">qw($Bin)</span><span class="structure">;</span>
+<span class="keyword">use</span> <span class="word">Text::Markdown</span> <span class="words">qw(markdown)</span><span class="structure">;</span>
 
-use Text::Xslate qw(mark_raw);
+<span class="keyword">use</span> <span class="word">Text::Xslate</span> <span class="words">qw(mark_raw)</span><span class="structure">;</span>
 
-my $xslate = Text::Xslate-&gt;new(
-    path      =&gt; ['./templates'],
-);
+<span class="keyword">my</span> <span class="symbol">$xslate</span> <span class="operator">=</span> <span class="word">Text::Xslate</span><span class="operator">-&gt;</span><span class="word">new</span><span class="structure">(</span>
+    <span class="word">path</span>      <span class="operator">=&gt;</span> <span class="structure">[</span><span class="double">&quot;$Bin/templates&quot;</span><span class="structure">]</span><span class="operator">,</span>
+<span class="structure">);</span>
 
-my $books = {
-    &quot;978-0596520106&quot; =&gt; {
-        name  =&gt; &quot;Learning Perl&quot;,
-        pages =&gt; &quot;352&quot;,
-    },
-    &quot;978-0596000271&quot; =&gt; {
-        name  =&gt; &quot;Programming Perl&quot;,
-        pages =&gt; &quot;1092&quot;,
-    },
-    &quot;978-4873114279&quot; =&gt; {
-        name  =&gt; &quot;初めてのPerl 第5版&quot;,
-        pages =&gt; &quot;424&quot;
-    },
-    &quot;978-4798119175&quot; =&gt; {
-        name  =&gt; &quot;モダンPerl入門&quot;,
-        pages =&gt; &quot;344&quot;,
-    },
-};
+<span class="keyword">my</span> <span class="symbol">$books</span> <span class="operator">=</span> <span class="structure">{</span>
+    <span class="double">&quot;978-0596520106&quot;</span> <span class="operator">=&gt;</span> <span class="structure">{</span>
+        <span class="word">name</span>  <span class="operator">=&gt;</span> <span class="double">&quot;Learning Perl&quot;</span><span class="operator">,</span>
+        <span class="word">pages</span> <span class="operator">=&gt;</span> <span class="number">352</span><span class="operator">,</span>
+    <span class="structure">}</span><span class="operator">,</span>
+    <span class="double">&quot;978-0596000271&quot;</span> <span class="operator">=&gt;</span> <span class="structure">{</span>
+        <span class="word">name</span>  <span class="operator">=&gt;</span> <span class="double">&quot;Programming Perl&quot;</span><span class="operator">,</span>
+        <span class="word">pages</span> <span class="operator">=&gt;</span> <span class="number">1092</span><span class="operator">,</span>
+    <span class="structure">}</span><span class="operator">,</span>
+    <span class="double">&quot;978-0596527242&quot;</span> <span class="operator">=&gt;</span> <span class="structure">{</span>
+        <span class="word">name</span>  <span class="operator">=&gt;</span> <span class="double">&quot;Mastering Perl&quot;</span><span class="operator">,</span>
+        <span class="word">pages</span> <span class="operator">=&gt;</span> <span class="number">352</span><span class="operator">,</span>
+    <span class="structure">}</span><span class="operator">,</span>
+    <span class="double">&quot;978-0596001735&quot;</span> <span class="operator">=&gt;</span> <span class="structure">{</span>
+        <span class="word">name</span>  <span class="operator">=&gt;</span> <span class="double">&quot;Perl Best Practices&quot;</span><span class="operator">,</span>
+        <span class="word">pages</span> <span class="operator">=&gt;</span> <span class="number">544</span><span class="operator">,</span>
+    <span class="structure">}</span><span class="operator">,</span>
+<span class="structure">};</span>
 
-my $html = '&lt;span style=&quot;color:red;&quot;&gt;colored&lt;/span&gt;';
+<span class="keyword">my</span> <span class="symbol">$see_also</span> <span class="operator">=</span> <span class="word">markdown</span><span class="structure">(</span><span class="heredoc">&lt;&lt;'END_MD'</span><span class="structure">);</span> <span class="comment"># an HTML generator</span>
+<span class="heredoc_content">SEE ALSO
+-----------------
+* http://perl.com/
+* http://perl.org/
+* http://search.cpan.org/
+</span><span class="heredoc_terminator">END_MD
+</span>
+<span class="keyword">my</span> <span class="symbol">$content</span> <span class="operator">=</span> <span class="symbol">$xslate</span><span class="operator">-&gt;</span><span class="word">render</span><span class="structure">(</span><span class="double">&quot;perlbook.tx&quot;</span><span class="operator">,</span> <span class="structure">{</span>
+    <span class="word">title</span>    <span class="operator">=&gt;</span> <span class="double">&quot;Perl Books&quot;</span><span class="operator">,</span>
+    <span class="word">books</span>    <span class="operator">=&gt;</span> <span class="symbol">$books</span><span class="operator">,</span>
+    <span class="word">see_also</span> <span class="operator">=&gt;</span> <span class="word">mark_raw</span><span class="structure">(</span><span class="symbol">$see_also</span><span class="structure">)</span><span class="operator">,</span>
+<span class="structure">});</span>
 
-my $content = $xslate-&gt;render(&quot;sample.xt&quot;, {
-    books  =&gt; $books,
-    html   =&gt; mark_raw($html),
-});
+<span class="word">print</span> <span class="word">encode_utf8</span><span class="structure">(</span><span class="symbol">$content</span><span class="structure">);</span>
 
-print $content;
-
-__END__</code></pre>
-
-        <h3>./templates/sample.xt</h3>
-
+<span class="separator">__END__</span>
+</code></pre>
+        <h3>Template: templates/perlbook.tx</h3>
         <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot; /&gt;
-    &lt;title&gt;Xslate sample&lt;/title&gt;
+    &lt;title&gt;&lt;: $title :&gt;&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
 
+&lt;h1&gt;&lt;: $title :&gt;&lt;/h1&gt;
 &lt;ol&gt;
     : for $books.keys() -&gt; $isbn {
-    &lt;li&gt;&lt;: $books[$isbn].name :&gt; - &lt;: $books[$isbn].pages :&gt;pages / ISBN-13 : &lt;: $isbn :&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;: $books[$isbn].name :&gt; - &lt;: $books[$isbn].pages :&gt; pages / ISBN-13 : &lt;: $isbn :&gt;&lt;/li&gt;
     : }
 &lt;/ol&gt;
 
@@ -97,26 +106,26 @@ $books =
     : $books | dump
 &lt;/pre&gt;
 
-: $html # interpolate HTML components
+: $see_also # interpolate HTML components
 
 &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-
-        <h3>Output of this script:</h3>
-
+&lt;/html&gt;
+</code></pre>
+        <h3>Output:</h3>
         <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot; /&gt;
-    &lt;title&gt;Xslate sample&lt;/title&gt;
+    &lt;title&gt;Perl Books&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
 
+&lt;h1&gt;Perl Books&lt;/h1&gt;
 &lt;ol&gt;
-    &lt;li&gt;Programming Perl - 1092pages / ISBN-13 : 978-0596000271&lt;/li&gt;
-    &lt;li&gt;Learning Perl - 352pages / ISBN-13 : 978-0596520106&lt;/li&gt;
-    &lt;li&gt;モダンPerl入門 - 344pages / ISBN-13 : 978-4798119175&lt;/li&gt;
-    &lt;li&gt;初めてのPerl 第5版 - 424pages / ISBN-13 : 978-4873114279&lt;/li&gt;
+    &lt;li&gt;Programming Perl - 1092 pages / ISBN-13 : 978-0596000271&lt;/li&gt;
+    &lt;li&gt;Perl Best Practices - 544 pages / ISBN-13 : 978-0596001735&lt;/li&gt;
+    &lt;li&gt;Learning Perl - 352 pages / ISBN-13 : 978-0596520106&lt;/li&gt;
+    &lt;li&gt;Mastering Perl - 352 pages / ISBN-13 : 978-0596527242&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;pre&gt;
@@ -124,30 +133,37 @@ $books =
 (
   &amp;apos;978-0596000271&amp;apos; =&amp;gt; {
     name =&amp;gt; &amp;apos;Programming Perl&amp;apos;,
-    pages =&amp;gt; &amp;apos;1092&amp;apos;
+    pages =&amp;gt; 1092
+  },
+  &amp;apos;978-0596001735&amp;apos; =&amp;gt; {
+    name =&amp;gt; &amp;apos;Perl Best Practices&amp;apos;,
+    pages =&amp;gt; 544
   },
   &amp;apos;978-0596520106&amp;apos; =&amp;gt; {
     name =&amp;gt; &amp;apos;Learning Perl&amp;apos;,
-    pages =&amp;gt; &amp;apos;352&amp;apos;
+    pages =&amp;gt; 352
   },
-  &amp;apos;978-4798119175&amp;apos; =&amp;gt; {
-    name =&amp;gt; &amp;quot;\x{30e2}\x{30c0}\x{30f3}Perl\x{5165}\x{9580}&amp;quot;,
-    pages =&amp;gt; &amp;apos;344&amp;apos;
-  },
-  &amp;apos;978-4873114279&amp;apos; =&amp;gt; {
-    name =&amp;gt; &amp;quot;\x{521d}\x{3081}\x{3066}\x{306e}Perl \x{7b2c}5\x{7248}&amp;quot;,
-    pages =&amp;gt; &amp;apos;424&amp;apos;
+  &amp;apos;978-0596527242&amp;apos; =&amp;gt; {
+    name =&amp;gt; &amp;apos;Mastering Perl&amp;apos;,
+    pages =&amp;gt; 352
   }
 )
 &lt;/pre&gt;
 
-&lt;span style=&quot;color:red;&quot;&gt;colored&lt;/span&gt;
+&lt;h2&gt;SEE ALSO&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;http://perl.com/&lt;/li&gt;
+&lt;li&gt;http://perl.org/&lt;/li&gt;
+&lt;li&gt;http://search.cpan.org/&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;/body&gt;
-&lt;/html&gt;</code></pre> 
-        </div>
+&lt;/html&gt;
+</code></pre>
 
         <div class="section clearfix">
-        <h2>Documentation</h2>
+        <h2>SEE ALSO</h2>
         <ul>
             <li><a href="http://search.cpan.org/dist/Text-Xslate/">Documents on CPAN</a></li>
             <li><a href="http://search.cpan.org/perldoc?Text::Xslate::Manual::FAQ">FAQ</a></li>
