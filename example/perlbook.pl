@@ -20,17 +20,17 @@ my $books = {
 
     # Programming Perl in Russian
     "978-5932860205" => {
-        name => "„P„‚„€„s„‚„p„}„}„y„‚„€„r„p„~„y„u „~„p Perl",
+        name => "ÐŸÑ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð½Ð° Perl",
         pages => 1152,
     },
 
     # Programming Perl in Japanese
     "978-4873110967" => {
-        name  => "ƒvƒƒOƒ‰ƒ~ƒ“ƒOPerl Vol.1",
+        name  => "ãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°Perl Vol.1",
         pages => 708,
     },
     "978-4873110974" => {
-        name  => "ƒvƒƒOƒ‰ƒ~ƒ“ƒOPerl Vol.2",
+        name  => "ãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°Perl Vol.2",
         pages => 1303,
     },
 };
