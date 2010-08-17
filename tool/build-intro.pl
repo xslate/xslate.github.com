@@ -1,5 +1,6 @@
 #!/usr/bin/perl -w
 use strict;
+BEGIN { binmode STDOUT, ':utf8' }
 
 use PPI;
 use PPI::HTML;

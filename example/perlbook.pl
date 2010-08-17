@@ -13,21 +13,25 @@ my $xslate = Text::Xslate->new(
 );
 
 my $books = {
-    "978-0596520106" => {
-        name  => "Learning Perl",
-        pages => 352,
-    },
     "978-0596000271" => {
         name  => "Programming Perl",
         pages => 1092,
     },
-    "978-0596527242" => {
-        name  => "Mastering Perl",
-        pages => 352,
+
+    # Programming Perl in Russian
+    "978-5932860205" => {
+        name => "„P„‚„€„s„‚„p„}„}„y„‚„€„r„p„~„y„u „~„p Perl",
+        pages => 1152,
     },
-    "978-0596001735" => {
-        name  => "Perl Best Practices",
-        pages => 544,
+
+    # Programming Perl in Japanese
+    "978-4873110967" => {
+        name  => "ƒvƒƒOƒ‰ƒ~ƒ“ƒOPerl Vol.1",
+        pages => 708,
+    },
+    "978-4873110974" => {
+        name  => "ƒvƒƒOƒ‰ƒ~ƒ“ƒOPerl Vol.2",
+        pages => 1303,
     },
 };
 
