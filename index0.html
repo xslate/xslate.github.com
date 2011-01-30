@@ -19,10 +19,11 @@
         <div class="description">
             The fastest template engine for Perl5.
         <form>
-            <label><input type="radio" onClick="set_logo(this.value)" value="0" name="logo" />#0</label>
-            <label><input type="radio" onClick="set_logo(this.value)" value="1" name="logo" />#1</label>
-            <label><input type="radio" onClick="set_logo(this.value)" value="2" name="logo" />#2</label>
-            <label><input type="radio" onClick="set_logo(this.value)" value="3" name="logo" />#3</label>
+        <script>
+            for(var i = 0; i < 10; i++) {
+                document.write('<label><input type="radio" onClick="set_logo(this.value)" value="'+i+'" name="logo" />#'+i+'</label>');
+            }
+        </script>
         </form>
         </div>
     </div>
