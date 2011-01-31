@@ -30,12 +30,19 @@ h1 {
     font-size: 3em;
     margin: 0;
 }
+h1.title {
+    display: inline-block;
+}
 h2 { font-size: 1.5em }
 h3 { font-size: 1.3em }
 h4 { font-size: 1.2em }
 em { font-style: italic; font-weight: bold }
 li { line-height: 1.3em; }
 pre { line-height: 1.2em; }
+
+.description {
+    display: inline-block;
+}
 
 .wrapper {
     width: 800px;
