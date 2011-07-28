@@ -37,6 +37,7 @@
         <pre><code><span class="comment">#!/usr/bin/env perl
 </span><span class="keyword">use</span> <span class="pragma">strict</span><span class="structure">;</span>
 <span class="keyword">use</span> <span class="pragma">warnings</span><span class="structure">;</span>
+<span class="keyword">use</span> <span class="pragma">utf8</span><span class="structure">;</span>
 <span class="keyword">use</span> <span class="word">Encode</span> <span class="words">qw(encode_utf8)</span><span class="structure">;</span>
 
 <span class="keyword">use</span> <span class="word">FindBin</span> <span class="words">qw($Bin)</span><span class="structure">;</span>
@@ -106,7 +107,7 @@
 &lt;/ol&gt;
 
 &lt;pre&gt;
-$books = 
+$books =
     : $books | dump
 &lt;/pre&gt;
 
@@ -133,7 +134,7 @@ $books =
 &lt;/ol&gt;
 
 &lt;pre&gt;
-$books = 
+$books =
 (
   &amp;apos;978-0596000271&amp;apos; =&amp;gt; {
     name =&amp;gt; &amp;apos;Programming Perl&amp;apos;,
