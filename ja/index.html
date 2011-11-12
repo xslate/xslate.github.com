@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
     <meta charset="UTF-8" />
     <meta name="keywords" content="Text::Xslate,Xslate,template engine,Perl,CPAN" />
     <title>Xslate - Scalable template engine for Perl5</title>
-    <link rel="stylesheet" type="text/css" href="css/reset.css" />
-    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../css/styles.css" />
 </head>
 <body>
 <div class="wrapper">
     <div class="header">
-        <h1 class="title"><img src="img/xslate_logo.png" alt="Xslate" /></h1>
+        <h1 class="title"><img src="../img/xslate_logo.png" alt="Xslate" /></h1>
         <div class="description">
             Scalable template engine for Perl5.
             <div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#appId=194389280616551&amp;xfbml=1"></script><fb:like href="http://xslate.org/" send="true" width="450" show_faces="true" font=""></fb:like>
@@ -18,22 +18,22 @@
     </div>
     <div id="content">
         <div class="GraphContainer">
-            <a href="benchmark.html"><img width="388" height="313" src="img/benchmark_rich_env.png" /></a>
+            <a href="../benchmark.html"><img width="388" height="313" src="../img/benchmark_rich_env.png" /></a>
         </div>
         <div class="section">
-        <h2>What is Xslate?</h2>
-        <p>Xslate is a template engine for Perl5 with the following features:</p>
+        <h2>Xslateとは</h2>
+        <p>XslateはPerl5用のテンプレートエンジンであり、次のような機能を持っています:</p>
         <ul>
-            <li>The fastest in CPAN - Up to <em>50~100 times</em> faster than TT2! (see <a href="benchmark.html">the benchmarks for more info</a>)</li>
-            <li>Support of multiple template syntaxes - TT2 compatible syntax, for example</li>
-            <li>Easy to enhance - by importing subroutines and/or by calling object methods</li>
-            <li>Safe - Escapes HTML meta characters by default</li>
-            <li>Debuggable - Readable error messages with correct line numers</li>
+            <li>CPAN最速 - Template::Toolkitより50〜100倍高速です</li>
+            <li>複数の構文をサポート - たとえば、TT2互換の構文があります</li>
+            <li>拡張が簡単 - テンプレート内でPerlのサブルーチンをつかったりオブジェクトメソッドを呼んだりできます</li>
+            <li>安全 - XSS防止のため自動的にHTMLメタキャラクタをエスケープします</li>
+            <li>デバッグが容易 - エラーメッセージに行番号やファイル名を表示します</li>
         </ul>
         </div>
 
         <div class="section clearfix">
-        <h2>Documentation</h2>
+        <h2>ドキュメント</h2>
         <ul>
             <li><a href="http://search.cpan.org/dist/Text-Xslate/">Documents on CPAN</a></li>
             <li><a href="http://search.cpan.org/perldoc?Text::Xslate::Manual::FAQ">FAQ</a></li>
@@ -42,14 +42,14 @@
         </div>
 
         <div class="section clearfix">
-        <h2>Getting started</h2>
-        <p>Install <a href="http://search.cpan.org/perldoc?App::cpanminus#INSTALLATION">cpanminus</a> and then run the following command to install Xslate.</p>
+        <h2>Xslateを使うには</h2>
+        <p><a href="http://search.cpan.org/perldoc?App::cpanminus#INSTALLATION">cpanminus</a>をインストールして、つぎのコマンドを入力するだけです。</p>
         <pre><code>$ cpanm Text::Xslate</code></pre>
         </div>
 
         <div class="section clearfix">
-        <h2>Introduction to Xslate</h2>
-        <p>See "<a href="intro.html">Quick introduction to Xslate</a>"</p>
+        <h2>Xslateの簡単な使い方</h2>
+        <p>See "<a href="../intro.html">Quick introduction to Xslate</a>"</p>
         </div>
 
         <div class="section clearfix">
@@ -131,13 +131,12 @@ Hello, {$lang} world!
         <ul>
             <li><a href="irc://irc.perl.org/#xslate">#xslate on irc.perl.org</a></li>
             <li><a href="http://groups.google.com/group/xslate?hl=en">Google Group (mailing list)</a></li>
-            <li><a href="https://github.com/xslate/xslate.github.com/wiki">Githu wiki</a></li>
-            <li><a href="https://github.com/xslate">the Xslate project page</a></li>
+            <li><a href="https://github.com/organizations/xslate">Activities on github</a></li>
         </ul>
         </div>
     </div>
     <div class="footer">
-        If you have requests for this web site, please send pull request on <a href="http://github.com/xslate/xslate.github.com">github</a>.
+        このドキュメントのリポジトリは <a href="http://github.com/xslate/xslate.github.com">github</a> にあります。改善案やバグフィクスのpull-requestをお待ちしています。
     </div>
 </div>
 </body>
