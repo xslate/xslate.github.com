@@ -31,7 +31,10 @@ h1 {
     margin: 0;
 }
 h1.title {
+    color: rgb(36, 47, 100);
     display: inline-block;
+    text-align: center;
+    line-height: 0;
 }
 h2 { font-size: 1.5em }
 h3 { font-size: 1.3em }
