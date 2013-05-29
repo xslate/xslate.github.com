@@ -76,7 +76,8 @@ pre { line-height: 1.2em; }
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 0 0 20px 0;
-    border-bottom: 1px solid #00f;
+    border-bottom: 1px solid rgb(36, 47, 100);
+;
 }
 .footer {
     border-top: 1px solid #cccccc;
